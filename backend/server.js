@@ -1,8 +1,13 @@
 import express from 'express';
-const port=5000
+import dotenv from 'dotenv';
+dotenv.config();
+const port = process.env.port || 5000;
+import userRoutes from './routes/userRoutes.js'
 
 const app = express();
 
-app.get('/', (req,res)=> res.send('server is ready'))
+app.use('/api/users', userRoutes);
 
-app.listen(port, ()=> console.log(`server stared on port ${port}`))
+app.get('/', (req, res) => res.send('server is ready'))
+
+app.listen(port, () => console.log(`server stared on port ${port}`))
